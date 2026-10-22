@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard IoT - Cassandra OCI</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏭 Dashboard de Telemetría IoT</h1>
+            <p>Planta Industrial Automatizada — Apache Cassandra + OCI</p>
+        </header>
+
+        <!-- Tarjetas KPI de Resumen Estadístico -->
+        <section class="kpi-grid">
+            <div class="card kpi">
+                <h3>Total Lecturas</h3>
+                <p id="kpi-total">0</p>
+            </div>
+            <div class="card kpi">
+                <h3>Temperatura Promedio</h3>
+                <p id="kpi-temp-prom">0 °C</p>
+            </div>
+            <div class="card kpi">
+                <h3>Humedad Promedio</h3>
+                <p id="kpi-hum-prom">0 %</p>
+            </div>
+            <div class="card kpi">
+                <h3>Temp. Máx / Mín</h3>
+                <p id="kpi-temp-ext">0 / 0 °C</p>
+            </div>
+        </section>
+
+        <!-- Panel de Simulación y Filtros -->
+        <section class="card control-panel">
+            <h2>⚙️ Simulación y Control de Sensores</h2>
+            <div class="form-group">
+                <input type="text" id="input-sensor-id" placeholder="UUID del Sensor (Ej. 123e4567-e89b-12d3-a456-426614174000)">
+                <input type="text" id="input-ubicacion" placeholder="Ubicación (Ej. Zona Horno 1)">
+                <input type="number" step="0.1" id="input-temp" placeholder="Temperatura (°C)">
+                <input type="number" step="0.1" id="input-hum" placeholder="Humedad (%)">
+                <button class="btn-primary" onclick="simularLectura()">Simular Lectura</button>
+            </div>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Tabla de Monitoreo en Tiempo Real -->
+        <section class="card">
+            <h2>📋 Registro de Actividad Reciente (Sensores IoT)</h2>
+            <p>Alerta de temperatura cuando supera <span id="umbral-alerta"></span> °C.</p>
+            <div class="sensor-filter">
+                <label for="filtro-sensor">Filtrar actividad por sensor:</label>
+                <select id="filtro-sensor">
+                    <option value="">Todos los sensores</option>
+                </select>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sensor ID</th>
+                            <th>Ubicación</th>
+                            <th>Fecha / Hora</th>
+                            <th>Temperatura</th>
+                            <th>Humedad</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-lecturas">
+                        <!-- Dinámico -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
